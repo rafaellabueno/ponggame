@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Prog</title>
-<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
-<style type="text/css">
-	canvas { 
-		background: #000000;
-		display: block;
-		position: fixed;
-	}	
-</style>
-</head>
-<body>
-  <canvas id="canvinha" width="1350" height="630"></canvas>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Prog</title>
+        <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            canvas { 
+                background: #000000;
+                display: block;
+                position: fixed;
+            }	
+        </style>
+    </head>
+    <body>
+        <canvas id="canvinha" width="1350" height="630"></canvas>
+    </body>
 
-<script>
-	var canvinha = document.getElementById("canvinha");
-	var teste = canvinha.getContext("2d");
+    <script>
+        var canvinha = document.getElementById("canvinha");
+        var teste = canvinha.getContext("2d");
 
-	var x = canvinha.width/2;
-	var y = canvinha.height/2;
+        var x = canvinha.width / 2;
+        var y = canvinha.height / 2;
 
-	var vet1 = [-2, 2];
-	var i1 = Math.floor(Math.random() * 2);
-	var dirx = vet1[i1];
+        var vet1 = [-2, 2];
+        var i1 = Math.floor(Math.random() * 2);
+        var dirx = vet1[i1];
 
-	var vet2 = [-2, 2];
-	var i2 = Math.floor(Math.random() * 2);
-	var diry = vet2[i2];
+        var vet2 = [-2, 2];
+        var i2 = Math.floor(Math.random() * 2);
+        var diry = vet2[i2];
 
-	function bolinha() {
-	    teste.beginPath();
-	    teste.rect(x, y, 20, 20);
-	    teste.fillStyle = "#c8c8c8";
-	    teste.fill();
-	    teste.closePath();
-	}
+        var bola = 15;
 
-	function mexe() {
-	    teste.clearRect(0, 0, canvinha.width, canvinha.height);
-	    bolinha();
-	    x += dirx;
-	    y += diry;
-	}
+        function bolinha() {
+            teste.beginPath();
+            teste.arc(x, y, bola, 0, Math.PI * 2);
+            teste.fillStyle = "#c8c8c8";
+            teste.fill();
+            teste.closePath();
+        }
 
-	setInterval(mexe, 13);
-</script>
+        function mexe() {
+            teste.clearRect(0, 0, canvinha.width, canvinha.height);
+            bolinha();
+
+            if (y + diry > canvinha.height - bola || y + diry < bola) {
+                diry = -diry;
+            } // bate no teto e no chão
+
+            x += dirx;
+            y += diry;
+        }
+
+        setInterval(mexe, 13);
+    </script>
 </html>
