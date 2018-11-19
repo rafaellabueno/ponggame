@@ -13,15 +13,24 @@
         </style>
     </head>
     <body>
-        <canvas id="canvinha" width="1350" height="630"></canvas>
+        <canvas id="canvinha" width="1350" height="600"></canvas>
     </body>
 
     <script>
+    	document.addEventListener("keydown", jog1Baixo, false);
+		document.addEventListener("keyup", jog1Cima, false);
+
+		document.addEventListener("keydown", jog2Baixo, false);
+		document.addEventListener("keyup", jog2Cima, false);
+
         var canvinha = document.getElementById("canvinha");
         var teste = canvinha.getContext("2d");
 
         var x = canvinha.width / 2;
         var y = canvinha.height / 2;
+
+        var tam1 = 240;
+        var tam2 = 240;
 
         var vet1 = [-2, 2];
         var i1 = Math.floor(Math.random() * 2);
@@ -33,6 +42,11 @@
 
         var bola = 15;
 
+        var jog1CimaP = false;
+        var jog1BaixoP = false;
+        var jog2CimaP = false;
+        var jog2BaixoP = false;
+
         function bolinha() {
             teste.beginPath();
             teste.arc(x, y, bola, 0, Math.PI * 2);
@@ -41,17 +55,84 @@
             teste.closePath();
         }
 
+        function jog1() {
+            teste.beginPath();
+            teste.rect(10, tam1, 20, 100);
+            teste.fillStyle = "#c8c8c8";
+            teste.fill();
+            teste.closePath();
+        }
+
+        function jog2() {
+            teste.beginPath();
+            teste.rect(1320, tam2, 20, 100);
+            teste.fillStyle = "#c8c8c8";
+            teste.fill();
+            teste.closePath();
+        }
+
         function mexe() {
             teste.clearRect(0, 0, canvinha.width, canvinha.height);
             bolinha();
+            jog1();
+        	jog2();
+
+            if(jog1CimaP) {
+		       tam1 -= 3;
+		    }
+		    else if(jog1BaixoP) {
+		       tam1 += 3;
+		    }
+
+		    if(jog2CimaP) {
+		       tam2 -= 3;
+		    }
+		    else if(jog2BaixoP) {
+		       tam2 += 3;
+		    }
 
             if (y + diry > canvinha.height - bola || y + diry < bola) {
                 diry = -diry;
-            } // bate no teto e no chão
+            } 
+
 
             x += dirx;
             y += diry;
         }
+
+        function jog1Baixo(e) {
+		    if(e.keyCode === 87) {
+		        jog1CimaP = true;
+		    }
+		    else if(e.keyCode === 83) {
+		        jog1BaixoP = true;
+		    }
+		}
+		function jog1Cima(e) {
+		    if(e.keyCode === 87) {
+		        jog1CimaP = false;
+		    }
+		    else if(e.keyCode === 83) {
+		        jog1BaixoP = false;
+		    }
+		}
+
+		function jog2Baixo(e) {
+		    if(e.keyCode === 38) {
+		        jog2CimaP = true;
+		    }
+		    else if(e.keyCode === 40) {
+		        jog2BaixoP = true;
+		    }
+		}
+		function jog2Cima(e) {
+		    if(e.keyCode === 38) {
+		        jog2CimaP = false;
+		    }
+		    else if(e.keyCode === 40) {
+		        jog2BaixoP = false;
+		    }
+		}
 
         setInterval(mexe, 13);
     </script>
