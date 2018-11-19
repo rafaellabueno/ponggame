@@ -76,25 +76,24 @@
             bolinha();
             jog1();
         	jog2();
-
-            if(jog1CimaP) {
+            console.log(canvinha.height);
+            if(jog1CimaP && (tam1)/2 < tam1) {
 		       tam1 -= 3;
 		    }
-		    else if(jog1BaixoP) {
+		    else if(jog1BaixoP && (tam1 + 100) < 600) {
 		       tam1 += 3;
 		    }
 
-		    if(jog2CimaP) {
+		    if(jog2CimaP && (tam2)/2 < tam2) {
 		       tam2 -= 3;
 		    }
-		    else if(jog2BaixoP) {
+		    else if(jog2BaixoP && (tam2 + 100) < 600) {
 		       tam2 += 3;
 		    }
 
             if (y + diry > canvinha.height - bola || y + diry < bola) {
                 diry = -diry;
             } 
-
 
             x += dirx;
             y += diry;
