@@ -34,6 +34,8 @@
         var tam1 = 240;
         var tam2 = 240;
 
+        var barraH, barraW;
+
         var vet1 = [-2, 2];
         var i1 = Math.floor(Math.random() * 2);
         var dirx = vet1[i1];
@@ -63,6 +65,8 @@
         function jog1() {
             teste.beginPath();
             teste.rect(10, tam1, 20, 100);
+            barraH = 100;
+            barraW = 20;
             teste.fillStyle = "#c8c8c8";
             teste.fill();
             teste.closePath();
@@ -79,13 +83,14 @@
 
         function pt1(){
         	teste.font="40px Verdana";
-			teste.fillText( pontop1,25,50);
+			teste.fillText( pontop2,25,50);
         }
 
         function pt2(){
         	teste.font="40px Verdana";
-			teste.fillText( pontop2,1300,50);
+			teste.fillText( pontop1,1300,50);
         }
+        var dentro = false;
 
         function mexe() {
             teste.clearRect(0, 0, canvinha.width, canvinha.height);
@@ -111,7 +116,15 @@
 
             if (y + diry > canvinha.height - bola || y + diry < bola) {
                 diry = -diry;
-            } 
+            }
+
+            if (((x + dirx > 1320 && x + dirx < 1320 + barraW && y > tam2 - 5 && y < tam2 + barraH + 5)  || (x - dirx > 10 && x - dirx < 10 + barraW && y > tam1 - 5 && y < tam1 + barraH + 5))) {
+                if(!dentro){
+                dirx = -dirx;
+                dentro = true;
+                    
+                }
+            } else dentro = false;
 
             if (x + dirx < bola - 50) {
                	  pontop1++;
@@ -202,7 +215,7 @@
             }
         }
 
-        setInterval(mexe, 13);
+        setInterval(mexe, 5);
         pt1();
         pt2();
     </script>
