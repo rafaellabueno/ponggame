@@ -44,8 +44,8 @@
 
         var bola = 15;
 
-        sessionStorage.pontop1 = 0;
-        sessionStorage.pontop2 = 0;
+        var pontop1 = 0;
+        var pontop2 = 0;
 
         var jog1CimaP = false;
         var jog1BaixoP = false;
@@ -74,6 +74,17 @@
             teste.fillStyle = "#c8c8c8";
             teste.fill();
             teste.closePath();
+
+        }
+
+        function pt1(){
+        	teste.font="40px Verdana";
+			teste.fillText( pontop1,25,50);
+        }
+
+        function pt2(){
+        	teste.font="40px Verdana";
+			teste.fillText( pontop2,1300,50);
         }
 
         function mexe() {
@@ -81,7 +92,9 @@
             bolinha();
             jog1();
             jog2();
-            
+            pt1();
+            pt2();
+
             if(jog1CimaP && (tam1)/2 < tam1) {
                tam1 -= 3;
             }
@@ -100,30 +113,42 @@
                 diry = -diry;
             } 
 
-            /*if (x + dirx < bola) {
-                dirx = -dirx;
-            } else if(x + dirx > canvinha.width-bola){
-                if(x < tam1 && x < tam1 + 20){
-                    dirx = -dirx;
-                }
-                else {
-                    document.location.reload();
-                }
-            }*/
-
             if (x + dirx < bola - 50) {
-                sessionStorage.pontop2 = sessionStorage.pontop2 + 1;
-                alert("Ponto para o jogador 2");
-                document.location.reload();
+               	  pontop1++;
+              	  vet1 = [-2, 2];
+        		  i1 = Math.floor(Math.random() * 2);
+        		  dirx = vet1[i1];
+
+       			  vet2 = [-2, 2];
+        		  i2 = Math.floor(Math.random() * 2);
+        		  diry = vet2[i2];
+
+              	  x = canvinha.width / 2;
+        		  y = canvinha.height / 2;
+              	  bolinha();
+              	  x += dirx;
+            	  y += diry;
+
             }
 
             if (x + dirx > canvinha.width-bola + 50) {
-                sessionStorage.pontop1 = sessionStorage.pontop1 + 1;
-                alert("Ponto para o jogador 1");
-                document.location.reload();
+                pontop2++;
+                vet1 = [-2, 2];
+        		i1 = Math.floor(Math.random() * 2);
+        		dirx = vet1[i1];
+
+       			vet2 = [-2, 2];
+        		i2 = Math.floor(Math.random() * 2);
+        		diry = vet2[i2];
+
+              	x = canvinha.width / 2;
+        		y = canvinha.height / 2;
+              	bolinha();
+              	x += dirx;
+            	y += diry;
             }
 
-            console.log(sessionStorage.pontop1);
+       
 
             x += dirx;
             y += diry;
@@ -164,5 +189,7 @@
         }
 
         setInterval(mexe, 13);
+        pt1();
+        pt2();
     </script>
 </html>
