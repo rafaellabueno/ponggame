@@ -152,8 +152,22 @@
 
             x += dirx;
             y += diry;
+
+            vencedor();
         }
 
+        function vencedor(){
+            if(pontop1===10){
+                alert("Jogador 2 Venceu!");
+                pontop1=0;
+                pontop2=0;
+            }
+            else if(pontop2===10){
+                alert("Jogador 1 Venceu!");
+                pontop1=0;
+                pontop2=0;
+            }
+        }
         function jog1Baixo(e) {
             if(e.keyCode === 87) {
                 jog1CimaP = true;
